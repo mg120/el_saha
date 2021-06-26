@@ -83,6 +83,8 @@ class LoginScreen extends StatelessWidget {
                                 if (_formKey.currentState.validate()) {
                                   _formKey.currentState.save();
                                   // No any error in validation
+                                  controller.updateProgressLoading(true);
+                                  controller.update();
                                   controller.signIn();
                                 }
                               } ,

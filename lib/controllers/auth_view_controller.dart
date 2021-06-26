@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:el_saha/models/state_model.dart';
 import 'package:el_saha/utils/constants.dart';
 import 'package:el_saha/view/Auth/verify_account.dart';
@@ -15,6 +13,9 @@ class AuthViewModel extends GetxController {
   StateModel _selectedState;
   StateModel get selectedState=>_selectedState;
 
+  bool _showContainer = true;
+  bool get showContainer => _showContainer;
+
   List<StateModel> _listCities =[];
   List<StateModel> get listCities => _listCities;
 
@@ -25,6 +26,11 @@ class AuthViewModel extends GetxController {
   // Initially password is obscure
   bool _progressLoading = false;
   bool get progressLoading => _progressLoading;
+
+  void updateContainerVisibility(){
+    _showContainer =!_showContainer;
+    update();
+  }
 
   void updateObscureText() {
     _obscureText = !_obscureText;
@@ -42,10 +48,6 @@ class AuthViewModel extends GetxController {
   }
 
   void signIn() async {
-    updateProgressLoading(true);
-    print("_progressLoading: $_progressLoading");
-    print("email: $email");
-    print("password: $password");
     Map<String, String> header = {"Accept-Language": "en"};
     Map<String, String> body = {
       "email": email,
@@ -75,11 +77,7 @@ class AuthViewModel extends GetxController {
   }
 
   void createAccount() async {
-    updateProgressLoading(true);
-    print("userName: $userName");
-    print("phone: $phone");
-    print("email: ${_selectedState.id}");
-    print("email: $email");
+    // updateProgressLoading(true);
     Map<String, String> header = {"Accept-Language": "en"};
     Map<String, String> body = {
       "username": userName,
@@ -121,6 +119,7 @@ class AuthViewModel extends GetxController {
         //assuming this json returns an array of signupresponse objects
           final List parsedList = convert.jsonDecode(response.body);
           _listCities = parsedList.map((val) =>  StateModel.fromJson(val)).toList();
+          print(_listCities.length);
           break;
         default:
           Get.snackbar("خطأ رقم الجوال او كلمة المرور", "تحقق من رقم الجوال او كلمة المرور الخاص بك",

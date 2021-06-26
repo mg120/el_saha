@@ -39,7 +39,6 @@ class VerifyAccount extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: GetBuilder<AuthViewModel>(
         builder:(controller)=> Scaffold(
-          backgroundColor: bgColor,
           appBar: AppBar(
             title: Text("تفعيل الحساب", style: theme.textTheme.title.copyWith(fontSize: 20),),
             centerTitle: true,

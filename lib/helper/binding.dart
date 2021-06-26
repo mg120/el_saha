@@ -1,5 +1,7 @@
 
 import 'package:el_saha/controllers/auth_view_controller.dart';
+import 'package:el_saha/controllers/class_traveler_controller.dart';
+import 'package:el_saha/controllers/destination_controller.dart';
 import 'package:el_saha/controllers/home_controller.dart';
 import 'package:el_saha/controllers/home_view_controller.dart';
 import 'package:el_saha/controllers/login_view_controller.dart';
@@ -17,5 +19,7 @@ class Binding extends Bindings{
     Get.lazyPut(() => OnBoardingController());
     Get.lazyPut(() => HomeController());
     Get.lazyPut(() => HomeViewController());
+    Get.lazyPut(() => DestinationController());
+    Get.lazyPut(() => ClassTravelerController());
   }
 }

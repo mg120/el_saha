@@ -104,28 +104,35 @@ class SignScreen extends StatelessWidget {
                                   child: ButtonTheme(
                                     alignedDropdown: true,
                                     child: DropdownButton<StateModel>(
-                                      isExpanded: true,
-                                      value: controller.selectedState,
-                                      iconSize: 30,
-                                      icon: (null),
-                                      style: theme.textTheme.body1.copyWith(color: Colors.grey, fontSize: 15),
-                                      hint: Text('اختر المدينة'),
-                                      onChanged: (StateModel newValue) {
-                                        print(newValue.id);
-                                        print(newValue.name);
-                                        controller.updateSelectedState(newValue);
-                                      },
-                                      items: controller.listCities?.map((item) {
-                                        return  new DropdownMenuItem(
-                                            child: new Text(item.name),
-                                            value: item,
-                                        );
-                                      })?.toList() ??
-                                          [],
+                                        isExpanded: true,
+                                        value: controller.selectedState,
+                                        iconSize: 30,
+                                        icon: (null),
+                                        style: theme.textTheme.body1.copyWith(color: Colors.grey, fontSize: 15),
+                                        hint: Text('اختر المدينة'),
+                                        onChanged: (StateModel newValue) {
+                                          print(newValue.id);
+                                          print(newValue.name);
+                                          controller.updateSelectedState(newValue);
+                                        },
+                                        items: controller.listCities?.map((item) {
+                                          return  new DropdownMenuItem(
+                                              child: Align(
+                                                alignment: Alignment.centerRight,
+                                                child: new Text(
+                                                    item.name,
+                                                  textAlign: TextAlign.right,
+                                                  textDirection: TextDirection.rtl,
+                                                ),
+                                              ),
+                                              value: item,
+                                          );
+                                        })?.toList() ??
+                                            [],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
                           ],
                         ),
                       ),
@@ -166,6 +173,8 @@ class SignScreen extends StatelessWidget {
                                return;
                              }
                              // No any error in validation
+                             controller.updateProgressLoading(true);
+                             controller.update();
                              controller.createAccount();
                            }
                          } ,
